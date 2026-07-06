@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin } from 'lucide-react'
+import WhatsAppIcon from './WhatsAppIcon'
 
 export default function Contact() {
   return (
@@ -27,14 +28,14 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="bg-panel border border-border rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden"
         >
-          <div className="pointer-events-none absolute -top-20 -right-20 w-72 h-72 bg-orange/10 blur-[100px] rounded-full" />
+          <div className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 sm:w-72 sm:h-72 bg-orange/10 blur-[60px] sm:blur-[100px] rounded-full" />
 
           <h3 className="font-display font-bold text-2xl mb-3 relative">
             Open to MERN developer roles &amp; collaborations
           </h3>
           <p className="text-muted mb-8 relative">Reach out any way that's convenient.</p>
 
-          <div className="grid sm:grid-cols-3 gap-4 mb-8 relative">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 relative">
             <a
               href="mailto:bukharifuzail58@gmail.com"
               className="flex flex-col items-center gap-2 p-4 rounded-xl bg-panel2 border border-border hover:border-orange transition-colors group"
@@ -49,20 +50,35 @@ export default function Contact() {
               <Phone size={20} className="text-orange" />
               <span className="text-xs">0349 2423177</span>
             </a>
+            <a
+              href="https://wa.me/923492423177"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-2 p-4 rounded-xl bg-panel2 border border-border hover:border-[#25D366] transition-colors group"
+            >
+              <WhatsAppIcon size={20} className="text-[#25D366]" />
+              <span className="text-xs">Chat on WhatsApp</span>
+            </a>
             <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-panel2 border border-border">
               <MapPin size={20} className="text-orange" />
               <span className="text-xs">Swabi, Pakistan</span>
             </div>
           </div>
 
-          <motion.a
-            href="mailto:bukharifuzail58@gmail.com"
-            animate={{ boxShadow: ['0 0 0px rgba(244,98,42,0)', '0 0 24px rgba(244,98,42,0.45)', '0 0 0px rgba(244,98,42,0)'] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-            className="inline-block px-8 py-3 rounded-full bg-orange hover:bg-orangeLight transition-colors font-semibold text-sm relative"
-          >
-            Say hello →
-          </motion.a>
+          <span className="relative inline-block">
+            <motion.span
+              className="absolute inset-0 rounded-full bg-orange blur-md"
+              animate={{ opacity: [0.15, 0.55, 0.15], scale: [0.95, 1.15, 0.95] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+              aria-hidden="true"
+            />
+            <a
+              href="mailto:bukharifuzail58@gmail.com"
+              className="relative inline-block px-8 py-3 rounded-full bg-orange hover:bg-orangeLight transition-colors font-semibold text-sm"
+            >
+              Say hello →
+            </a>
+          </span>
 
           <div className="flex justify-center gap-4 mt-8 relative">
             <a

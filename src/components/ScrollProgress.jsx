@@ -6,19 +6,28 @@ const DOTS = 6
 
 export default function ScrollProgress() {
   const { scrollYProgress } = useScroll()
-  const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 22, mass: 0.3 })
-  const markerTop = useTransform(smooth, [0, 1], ['0%', '100%'])
+
+  // Clamp the raw progress first — on mobile, the browser's collapsing
+  // address bar can momentarily push this outside [0, 1].
+  const clamped = useTransform(scrollYProgress, [0, 1], [0, 1], { clamp: true })
+  const smooth = useSpring(clamped, { stiffness: 120, damping: 26, mass: 0.25 })
+  // Clamp again after the spring, since spring physics can overshoot the target.
+  const markerTop = useTransform(smooth, [0, 1], ['0%', '100%'], { clamp: true })
+
   const [percent, setPercent] = useState(0)
 
   useEffect(() => {
-    return scrollYProgress.on('change', (v) => setPercent(Math.round(v * 100)))
-  }, [scrollYProgress])
+    return clamped.on('change', (v) => {
+      const safe = Math.min(100, Math.max(0, Math.round(v * 100)))
+      setPercent(safe)
+    })
+  }, [clamped])
 
   return (
     <div className="fixed right-2 sm:right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center select-none">
       <ChevronUp size={13} className="text-orange mb-2 opacity-80" />
 
-      <div className="relative w-px h-40 sm:h-56 md:h-64 bg-border">
+      <div className="relative w-px h-40 sm:h-56 md:h-64 bg-border overflow-visible">
         {Array.from({ length: DOTS }).map((_, i) => (
           <span
             key={i}

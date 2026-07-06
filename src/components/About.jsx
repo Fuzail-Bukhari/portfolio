@@ -1,25 +1,11 @@
 import { motion } from 'framer-motion'
-import { GraduationCap, Award, Sparkles, ExternalLink } from 'lucide-react'
+import { GraduationCap, MapPin, Calendar, Rocket } from 'lucide-react'
 
-const CERTS = [
-  {
-    icon: <Award size={18} />,
-    title: 'IBM JavaScript Backend Developer',
-    subtitle: 'Professional Certificate · Coursera',
-    link: 'https://coursera.org/verify/professional-cert/OGS9JR2RIGDU',
-  },
-  {
-    icon: <Sparkles size={18} />,
-    title: 'Generative AI for UI UX Design',
-    subtitle: 'Specialization · Coursera',
-    link: 'https://coursera.org/verify/specialization/495XAQY8Z6QG',
-  },
-  {
-    icon: <GraduationCap size={18} />,
-    title: 'BS Software Engineering',
-    subtitle: 'COMSATS University Islamabad, Abbottabad — Class of 2027',
-    link: null,
-  },
+const FACTS = [
+  { icon: <GraduationCap size={18} />, label: 'Degree', value: 'BS Software Engineering' },
+  { icon: <Calendar size={18} />, label: 'Status', value: '6th Semester · Class of 2027' },
+  { icon: <MapPin size={18} />, label: 'Based in', value: 'Swabi, Pakistan' },
+  { icon: <Rocket size={18} />, label: 'Currently', value: 'Open to MERN roles' },
 ]
 
 export default function About() {
@@ -34,9 +20,7 @@ export default function About() {
           className="mb-14"
         >
           <span className="text-orange font-semibold text-sm uppercase tracking-wide">About</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl mt-2">
-            Background &amp; credentials
-          </h2>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl mt-2">Background</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -50,9 +34,9 @@ export default function About() {
             <p>
               I'm a 6th-semester BS Software Engineering student at COMSATS University Islamabad,
               Abbottabad Campus, expecting to graduate in 2027. Alongside coursework, I build
-              production-style MERN projects, completed a remote MERN internship, and I'm
-              currently exploring an FYP at the intersection of web development and machine
-              learning.
+              production-style MERN projects, completed a MERN internship at Elite Tech Solutions,
+              and I'm currently exploring an FYP at the intersection of web development and
+              machine learning.
             </p>
             <p>Based in Swabi, Pakistan — open to MERN stack developer roles, locally and abroad.</p>
           </motion.div>
@@ -62,41 +46,25 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="bg-panel border border-border rounded-2xl divide-y divide-border"
+            className="grid grid-cols-2 gap-4"
           >
-            {CERTS.map((cert, i) => {
-              const Wrapper = cert.link ? motion.a : motion.div
-              return (
-                <Wrapper
-                  key={cert.title}
-                  {...(cert.link
-                    ? { href: cert.link, target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  whileHover={cert.link ? { x: 4, backgroundColor: 'rgba(244,98,42,0.06)' } : {}}
-                  className="flex gap-4 p-5 items-start group cursor-default"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-panel2 flex items-center justify-center text-orange shrink-0">
-                    {cert.icon}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <h5 className="font-medium text-sm">{cert.title}</h5>
-                      {cert.link && (
-                        <ExternalLink
-                          size={13}
-                          className="text-muted group-hover:text-orange transition-colors shrink-0"
-                        />
-                      )}
-                    </div>
-                    <p className="text-muted text-sm">{cert.subtitle}</p>
-                  </div>
-                </Wrapper>
-              )
-            })}
+            {FACTS.map((fact, i) => (
+              <motion.div
+                key={fact.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                whileHover={{ y: -3 }}
+                className="bg-panel border border-border rounded-xl p-5"
+              >
+                <div className="w-9 h-9 rounded-lg bg-panel2 flex items-center justify-center text-orange mb-3">
+                  {fact.icon}
+                </div>
+                <p className="text-[11px] text-muted uppercase tracking-wide mb-1">{fact.label}</p>
+                <p className="font-medium text-sm">{fact.value}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>

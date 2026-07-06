@@ -6,6 +6,8 @@ import useActiveSection from '../hooks/useActiveSection'
 const LINKS = [
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'resume', label: 'Resume' },
   { id: 'toolbox', label: 'Toolbox' },
 ]
 
@@ -31,7 +33,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-bg/90 backdrop-blur-md border-b border-border shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-bg/95 sm:bg-bg/90 sm:backdrop-blur-md border-b border-border shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -45,12 +47,12 @@ export default function Navbar() {
           Fuzail
         </button>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-7">
           {LINKS.map((link) => (
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              className={`relative text-sm font-medium transition-colors py-1 ${
+              className={`relative text-xs lg:text-sm font-medium transition-colors py-1 whitespace-nowrap ${
                 active === link.id ? 'text-orange' : 'text-muted hover:text-white'
               }`}
             >

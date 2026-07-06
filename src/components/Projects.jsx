@@ -33,11 +33,49 @@ const PROJECTS = [
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.12 } },
 }
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
+}
+
+function ProjectCard({ p }) {
+  return (
+    <motion.a
+      href={p.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      variants={item}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
+      className="group bg-panel border border-border rounded-2xl overflow-hidden hover:border-orange/60 transition-colors flex flex-col"
+    >
+      <div className={`h-40 flex items-center justify-center bg-gradient-to-br ${p.gradient} relative`}>
+        <span className="font-display font-bold text-2xl">{p.title}</span>
+        <ArrowUpRight
+          size={20}
+          className="absolute top-4 right-4 text-white/70 group-hover:text-orange group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+        />
+      </div>
+      <div className="p-6 flex-1 flex flex-col">
+        <span className="text-orange text-xs font-semibold uppercase tracking-wide mb-2">
+          {p.tag}
+        </span>
+        <p className="text-muted text-sm mb-5 flex-1">{p.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {p.tags.map((t) => (
+            <span
+              key={t}
+              className="text-xs px-2.5 py-1 rounded-md bg-panel2 border border-border text-muted"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.a>
+  )
 }
 
 export default function Projects() {
@@ -45,15 +83,13 @@ export default function Projects() {
     <section id="projects" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.45 }}
           className="mb-14"
         >
-          <span className="text-orange font-semibold text-sm uppercase tracking-wide">
-            Work
-          </span>
+          <span className="text-orange font-semibold text-sm uppercase tracking-wide">Work</span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl mt-2">
             Projects I've shipped
           </h2>
@@ -67,42 +103,7 @@ export default function Projects() {
           className="grid md:grid-cols-3 gap-6"
         >
           {PROJECTS.map((p) => (
-            <motion.a
-              key={p.title}
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={item}
-              whileHover={{ y: -8, scale: 1.015 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="group bg-panel border border-border rounded-2xl overflow-hidden hover:border-orange/60 transition-colors flex flex-col"
-            >
-              <div
-                className={`h-40 flex items-center justify-center bg-gradient-to-br ${p.gradient} relative`}
-              >
-                <span className="font-display font-bold text-2xl">{p.title}</span>
-                <ArrowUpRight
-                  size={20}
-                  className="absolute top-4 right-4 text-white/70 group-hover:text-orange group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <span className="text-orange text-xs font-semibold uppercase tracking-wide mb-2">
-                  {p.tag}
-                </span>
-                <p className="text-muted text-sm mb-5 flex-1">{p.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-2.5 py-1 rounded-md bg-panel2 border border-border text-muted"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.a>
+            <ProjectCard key={p.title} p={p} />
           ))}
         </motion.div>
       </div>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Linkedin, Github, ArrowUpRight, Mail } from 'lucide-react'
+import WhatsAppIcon from './WhatsAppIcon'
 import useCountUp from '../hooks/useCountUp'
 
 function StatBadge({ target, label, className, delay }) {
@@ -25,7 +26,7 @@ export default function Hero() {
       className="min-h-screen flex items-center pt-28 pb-16 px-6 relative overflow-hidden"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-10 left-10 w-72 h-72 bg-orange/10 blur-[110px] rounded-full" />
+        <div className="absolute top-10 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-orange/10 blur-[60px] sm:blur-[110px] rounded-full" />
       </div>
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center w-full relative">
@@ -119,6 +120,15 @@ export default function Hero() {
             >
               <Mail size={15} />
             </a>
+            <a
+              href="https://wa.me/923492423177"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="w-9 h-9 rounded-full bg-panel2 border border-border flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-colors"
+            >
+              <WhatsAppIcon size={15} />
+            </a>
           </motion.div>
         </div>
 
@@ -136,12 +146,15 @@ export default function Hero() {
           <img
             src="/profile.jpg"
             alt="Fuzail"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
             className="absolute inset-[18%] w-[64%] h-[64%] object-cover rounded-full shadow-glow"
           />
 
           <StatBadge target={3} label="Projects Built" className="top-2 -right-2 sm:right-0" delay={0.6} />
           <StatBadge target={1} label="MERN Internship" className="left-0 top-1/2 -translate-y-1/2 -translate-x-2" delay={0.75} />
-          <StatBadge target={2} label="Certifications" className="bottom-2 right-6" delay={0.9} />
+          <StatBadge target={10} label="Certifications" className="bottom-2 right-6" delay={0.9} />
         </motion.div>
       </div>
     </section>
